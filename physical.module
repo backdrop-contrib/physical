@@ -323,8 +323,9 @@ function physical_field_widget_form(&$form, &$form_state, $field, $instance, $la
     // If the user cannot select a different unit of measurement and the current
     // unit is the same as the default...
     if (empty($settings['unit_select_list']) && $value['unit'] == $settings['default_unit']) {
-      // Display the unit of measurement after the textfield.
-      $element['height']['#field_suffix'] = physical_dimension_unit_abbreviation($value['unit']);
+      // Display the unit of measurement after the last textfield using the
+      // final $key value from the above foreach loop.
+      $element[$key]['#field_suffix'] = physical_dimension_unit_abbreviation($value['unit']);
 
       // Add a hidden value for the default unit of measurement.
       $element['unit'] = array(
