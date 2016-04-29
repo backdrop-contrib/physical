@@ -210,7 +210,7 @@ function physical_field_widget_form(&$form, &$form_state, $field, $instance, $la
       '#default_value' => $weight,
       '#size' => 15,
       '#maxlength' => 16,
-      '#required' => $instance['required'] && ($delta == 0 || $field['cardinality'] > 0),
+      '#required' => $instance['required'] && $delta == 0,
     );
 
     // Determine the unit of measurement.
@@ -310,7 +310,7 @@ function physical_field_widget_form(&$form, &$form_state, $field, $instance, $la
         '#default_value' => $value[$key],
         '#size' => 15,
         '#maxlength' => 16,
-        '#required' => $instance['required'] && ($delta == 0 || $field['cardinality'] > 0),
+        '#required' => $instance['required'] && $delta == 0,
         '#field_suffix' => '&times;',
         '#prefix' => '<div class="physical-dimension-form-item">',
         '#suffix' => '</div>',
