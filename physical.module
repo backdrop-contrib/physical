@@ -514,6 +514,14 @@ function physical_weight_format($value) {
  *   target 'unit' type.
  */
 function physical_weight_convert($weight, $unit) {
+  // If the $weight field value is empty for some reason, return a 0 weight in
+  // the target unit type.
+  if (empty($weight) || empty($weight['weight'])) {
+    return array('weight' => 0, 'unit' => $unit);
+  }
+
+  // If the target unit type is the same as the weight field value that was
+  // passed in, simply return it as is.
   if ($weight['unit'] == $unit) {
     return $weight;
   }
