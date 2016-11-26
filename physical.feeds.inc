@@ -18,7 +18,7 @@
 function physical_feeds_processor_targets_alter(&$targets, $entity_type, $bundle_name) {
   foreach (field_info_instances($entity_type, $bundle_name) as $name => $instance) {
     $info = field_info_field($name);
-    if ($info['type'] == 'physical_weight' || $info['type'] == 'physical_dimensions') {
+    if (in_array($info['type'], array('physical_weight', 'physical_dimensions', 'physical_volume'))) {
       foreach ($info['columns'] as $sub_field => $schema_info) {
         $name_label = $instance['label'] . ': ' . drupal_ucfirst(str_replace('_', ' ', $sub_field));
         $targets[$name . ':' . $sub_field] = array(
@@ -66,6 +66,7 @@ function physical_feeds_set_target($source, $entity, $target, $value) {
       'height' => 0,
       'width' => 0,
       'weight' => 0,
+      'volume' => 0,
       'unit' => $info_instance['widget']['settings']['default_unit'],
     );
   }
