@@ -550,15 +550,15 @@ function physical_field_formatter_view($entity_type, $entity, $field, $instance,
 function physical_volume_units() {
   $units = array(
     'l' => array(
-      'name' => t('Litre'),
+      'name' => t('Liter'),
       'abbreviation' => t('l'),
     ),
     'm3' => array(
-      'name' => t('Cubic Metre'),
+      'name' => t('Cubic Meter'),
       'abbreviation' => t('m3'),
     ),
     'ml' => array(
-      'name' => t('Millilitre'),
+      'name' => t('Milliliter'),
       'abbreviation' => t('ml'),
     ),
     'fl oz' => array(
