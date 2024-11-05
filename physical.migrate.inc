@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implementation of hook_migrate_api().
+ * Implements hook_migrate_api().
  */
 function physical_migrate_api() {
   $api = array(

@@ -87,7 +87,7 @@ function physical_field_validate($entity_type, $entity, $field, $instance, $lang
         if (!empty($item[$key]) && !is_numeric($item[$key])) {
           $errors[$field['field_name']][$langcode][$delta][] = array(
             'error' => 'physical_dimensions',
-            'message' => t('%name: you must enter a numeric !dimension value.', array('%name' => $instance['label'], '!dimension' => drupal_strtolower($dimension['name']))),
+            'message' => t('%name: you must enter a numeric !dimension value.', array('%name' => $instance['label'], '!dimension' => backdrop_strtolower($dimension['name']))),
             'dimension' => $key,
           );
         }
@@ -100,7 +100,7 @@ function physical_field_validate($entity_type, $entity, $field, $instance, $lang
           if (!isset($item[$key]) || $item[$key] == NULL) {
             $errors[$field['field_name']][$langcode][$delta][] = array(
               'error' => 'physical_dimensions',
-              'message' => t('%name: you must supply a !dimension value.', array('%name' => $instance['label'], '!dimension' => drupal_strtolower($dimension['name']))),
+              'message' => t('%name: you must supply a !dimension value.', array('%name' => $instance['label'], '!dimension' => backdrop_strtolower($dimension['name']))),
               'dimension' => $key,
             );
           }
@@ -295,11 +295,11 @@ function physical_field_widget_form(&$form, &$form_state, $field, $instance, $la
       // If the user isn't supposed to have access to select a unit of
       // measurement, only allow the default and the current unit.
       if (empty($settings['unit_select_list'])) {
-        $options = array_intersect_key($options, drupal_map_assoc(array($unit, $settings['default_unit'])));
+        $options = array_intersect_key($options, backdrop_map_assoc(array($unit, $settings['default_unit'])));
       }
 
       // Display a unit of measurement select list after the textfield.
-      $element['#attached']['css'][] = drupal_get_path('module', 'physical') . '/theme/physical.css';
+      $element['#attached']['css'][] = backdrop_get_path('module', 'physical') . '/theme/physical.css';
       $element['volume']['#prefix'] = '<div class="physical-volume-input">';
 
       $element['unit'] = array(
@@ -377,11 +377,11 @@ function physical_field_widget_form(&$form, &$form_state, $field, $instance, $la
       // If the user isn't supposed to have access to select a unit of
       // measurement, only allow the default and the current unit.
       if (empty($settings['unit_select_list'])) {
-        $options = array_intersect_key($options, drupal_map_assoc(array($unit, $settings['default_unit'])));
+        $options = array_intersect_key($options, backdrop_map_assoc(array($unit, $settings['default_unit'])));
       }
 
       // Display a unit of measurement select list after the textfield.
-      $element['#attached']['css'][] = drupal_get_path('module', 'physical') . '/theme/physical.css';
+      $element['#attached']['css'][] = backdrop_get_path('module', 'physical') . '/theme/physical.css';
       $element['weight']['#prefix'] = '<div class="physical-weight-textfield">';
 
       $element['unit'] = array(
@@ -431,7 +431,7 @@ function physical_field_widget_form(&$form, &$form_state, $field, $instance, $la
     $element['#type'] = 'fieldset';
     $element['#attributes']['class'][] = 'physical-dimensions-textfields';
 
-    $element['#attached']['css'][] = drupal_get_path('module', 'physical') . '/theme/physical.css';
+    $element['#attached']['css'][] = backdrop_get_path('module', 'physical') . '/theme/physical.css';
 
     foreach (physical_dimensions() as $key => $dimension) {
       $element[$key] = array(
@@ -470,7 +470,7 @@ function physical_field_widget_form(&$form, &$form_state, $field, $instance, $la
       // If the user isn't supposed to have access to select a unit of
       // measurement, only allow the default and the current unit.
       if (empty($settings['unit_select_list'])) {
-        $options = array_intersect_key($options, drupal_map_assoc(array($value['unit'], $settings['default_unit'])));
+        $options = array_intersect_key($options, backdrop_map_assoc(array($value['unit'], $settings['default_unit'])));
       }
 
       // Display a unit of measurement select list after the textfield.
@@ -575,7 +575,7 @@ function physical_volume_units() {
     ),
   );
 
-  drupal_alter('physical_volume_unit_info', $units);
+  backdrop_alter('physical_volume_unit_info', $units);
 
   return $units;
 }
@@ -606,7 +606,7 @@ function physical_weight_units() {
     ),
   );
 
-  drupal_alter('physical_weight_unit_info', $units);
+  backdrop_alter('physical_weight_unit_info', $units);
 
   return $units;
 }
@@ -1038,14 +1038,14 @@ function physical_volume_field_data_property_info($name = NULL) {
   return array(
     'volume' => array(
       'label' => t('Volume'),
-      'description' => !empty($name) ? t('Volume value of field %name', array('%name' => $name)) : '',
+      'description' => !empty($name)?t('Volume value of field %name', array('%name' => $name)) : '',
       'type' => 'decimal',
       'getter callback' => 'entity_property_verbatim_get',
       'setter callback' => 'entity_property_verbatim_set',
     ),
     'unit' => array(
       'label' => t('Unit of measurement'),
-      'description' => !empty($name) ? t('Unit of measurement of field %name', array('%name' => $name)) : '',
+      'description' => !empty($name)?t('Unit of measurement of field %name', array('%name' => $name)) : '',
       'type' => 'text',
       'getter callback' => 'entity_property_verbatim_get',
       'setter callback' => 'entity_property_verbatim_set',
@@ -1061,14 +1061,14 @@ function physical_weight_field_data_property_info($name = NULL) {
   return array(
     'weight' => array(
       'label' => t('Weight'),
-      'description' => !empty($name) ? t('Weight value of field %name', array('%name' => $name)) : '',
+      'description' => !empty($name)?t('Weight value of field %name', array('%name' => $name)) : '',
       'type' => 'decimal',
       'getter callback' => 'entity_property_verbatim_get',
       'setter callback' => 'entity_property_verbatim_set',
     ),
     'unit' => array(
       'label' => t('Unit of measurement'),
-      'description' => !empty($name) ? t('Unit of measurement of field %name', array('%name' => $name)) : '',
+      'description' => !empty($name)?t('Unit of measurement of field %name', array('%name' => $name)) : '',
       'type' => 'text',
       'getter callback' => 'entity_property_verbatim_get',
       'setter callback' => 'entity_property_verbatim_set',
@@ -1093,7 +1093,7 @@ function physical_dimensions() {
     ),
   );
 
-  drupal_alter('physical_dimension_info', $dimensions);
+  backdrop_alter('physical_dimension_info', $dimensions);
 
   return $dimensions;
 }
@@ -1125,7 +1125,7 @@ function physical_dimension_units() {
     ),
   );
 
-  drupal_alter('physical_dimension_unit_info', $units);
+  backdrop_alter('physical_dimension_unit_info', $units);
 
   return $units;
 }
@@ -1346,28 +1346,28 @@ function physical_dimensions_field_data_property_info($name = NULL) {
   return array(
     'length' => array(
       'label' => t('Length'),
-      'description' => !empty($name) ? t('Length value of field %name', array('%name' => $name)) : '',
+      'description' => !empty($name)?t('Length value of field %name', array('%name' => $name)) : '',
       'type' => 'decimal',
       'getter callback' => 'entity_property_verbatim_get',
       'setter callback' => 'entity_property_verbatim_set',
     ),
     'width' => array(
       'label' => t('Width'),
-      'description' => !empty($name) ? t('Width value of field %name', array('%name' => $name)) : '',
+      'description' => !empty($name)?t('Width value of field %name', array('%name' => $name)) : '',
       'type' => 'decimal',
       'getter callback' => 'entity_property_verbatim_get',
       'setter callback' => 'entity_property_verbatim_set',
     ),
     'height' => array(
       'label' => t('Height'),
-      'description' => !empty($name) ? t('Height value of field %name', array('%name' => $name)) : '',
+      'description' => !empty($name)?t('Height value of field %name', array('%name' => $name)) : '',
       'type' => 'decimal',
       'getter callback' => 'entity_property_verbatim_get',
       'setter callback' => 'entity_property_verbatim_set',
     ),
     'unit' => array(
       'label' => t('Unit of measurement'),
-      'description' => !empty($name) ? t('Unit of measurement of field %name', array('%name' => $name)) : '',
+      'description' => !empty($name)?t('Unit of measurement of field %name', array('%name' => $name)) : '',
       'type' => 'text',
       'getter callback' => 'entity_property_verbatim_get',
       'setter callback' => 'entity_property_verbatim_set',

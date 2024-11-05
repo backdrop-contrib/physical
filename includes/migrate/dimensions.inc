@@ -56,7 +56,7 @@ class MigratePhysicalDimensionsFieldHandler extends MigrateFieldHandler {
       $arguments = array();
     }
 
-    if(empty($values)) {
+    if (empty($values)) {
       $values = array(0 => '');
     }
 

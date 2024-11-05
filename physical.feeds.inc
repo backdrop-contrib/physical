@@ -20,7 +20,7 @@ function physical_feeds_processor_targets_alter(&$targets, $entity_type, $bundle
     $info = field_info_field($name);
     if (in_array($info['type'], array('physical_weight', 'physical_dimensions', 'physical_volume'))) {
       foreach ($info['columns'] as $sub_field => $schema_info) {
-        $name_label = $instance['label'] . ': ' . drupal_ucfirst(str_replace('_', ' ', $sub_field));
+        $name_label = $instance['label'] . ': ' . backdrop_ucfirst(str_replace('_', ' ', $sub_field));
         $targets[$name . ':' . $sub_field] = array(
           'name' => $name_label,
           'callback' => 'physical_feeds_set_target',
